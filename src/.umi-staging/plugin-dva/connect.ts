@@ -6,9 +6,15 @@ import { EffectsCommandMap, SubscriptionAPI } from 'dva';
 import { match } from 'react-router-dom';
 import { Location, LocationState, History } from 'history';
 
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/billsModal';
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/customerModal';
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/dashboardModel';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/global';
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/inventoryModel';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/login';
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/ordersModel';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/setting';
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/storeModal';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/models/user';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/center/model';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/settings/model';
@@ -25,6 +31,7 @@ export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/l
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/search/projects/model';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/profile/advanced/model';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/profile/basic/model';
+export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/login/model';
 export * from '/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register/model';
 
 export interface Action<T = any> {

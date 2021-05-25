@@ -25,40 +25,54 @@ class AvatarDropdown extends React.Component {
   };
 
   render() {
-    const {
-      currentUser = {
-        avatar: '',
-        name: '',
-      },
-      menu,
-    } = this.props;
+    console.log(this.props);
+    const { currentUser, menu } = this.props;
+    const { company_name, company_logo } = currentUser;
+    // const { currentUser } = this.props;
+    // const { company_name, company_logo } = currentUser;
+
+    // console.log('userAndlogin', userAndlogin);
+    // const {
+    //   currentUser = {
+    //     avatar: '',
+    //     name: '',
+    //   },
+    //   menu,
+    // } = this.props;
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         {menu && (
           <Menu.Item key="center">
             <UserOutlined />
-            个人中心
+            User
           </Menu.Item>
         )}
         {menu && (
           <Menu.Item key="settings">
             <SettingOutlined />
-            个人设置
+            Setting
           </Menu.Item>
         )}
         {menu && <Menu.Divider />}
 
         <Menu.Item key="logout">
           <LogoutOutlined />
-          退出登录
+          logout
         </Menu.Item>
       </Menu>
     );
-    return currentUser && currentUser.name ? (
+    // return currentUser && currentUser.name ? (
+    //   <HeaderDropdown overlay={menuHeaderDropdown}>
+    //     <span className={`${styles.action} ${styles.account}`}>
+    //       <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
+    //       <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+    //     </span>
+    //   </HeaderDropdown>
+    return currentUser && company_name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+          <Avatar size="small" className={styles.avatar} src={company_logo} alt="avatar" />
+          <span className={`${styles.name} anticon`}>{company_name}</span>
         </span>
       </HeaderDropdown>
     ) : (
@@ -75,6 +89,7 @@ class AvatarDropdown extends React.Component {
   }
 }
 
-export default connect(({ user }) => ({
+export default connect(({ userAndlogin, user }) => ({
   currentUser: user.currentUser,
+  userAndlogin,
 }))(AvatarDropdown);

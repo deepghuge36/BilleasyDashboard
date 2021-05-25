@@ -1,14 +1,16 @@
 const proSettings = {
-  navTheme: 'dark',
+  navTheme: 'realDark',
   // 拂晓蓝
   primaryColor: '#1890ff',
+  // primaryColor: '#5066D8',
   layout: 'side',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: 'Billeasy',
   pwa: false,
   iconfontUrl: '',
+  language: 'en-US',
 };
 export default proSettings;

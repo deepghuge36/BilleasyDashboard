@@ -41,3 +41,7 @@ build
 
 
 node_modules
+
+
+# Login text
+login.txt

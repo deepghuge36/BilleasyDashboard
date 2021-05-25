@@ -6,13 +6,16 @@ import {
   TaobaoCircleOutlined,
   UserOutlined,
   WeiboCircleOutlined,
+  GoogleTwoTone,
 } from '@ant-design/icons';
 import { Alert, Space, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, connect, FormattedMessage } from 'umi';
 import { getFakeCaptcha } from '@/services/login';
-import styles from './index.less';
+import styles from './login.less';
+import { textSpanIntersection } from 'typescript';
+import { SpaceContext } from 'antd/lib/space';
 
 const LoginMessage = ({ content }) => (
   <Alert
@@ -28,14 +31,26 @@ const LoginMessage = ({ content }) => (
 const Login = (props) => {
   const { userLogin = {}, submitting } = props;
   const { status, type: loginType } = userLogin;
+  const { userAndlogin = {} } = props;
+  console.log('userAndlogin', userAndlogin);
+  // const { status } = userAndlogin;
   const [type, setType] = useState('account');
   const intl = useIntl();
+  console.log('status', status);
 
   const handleSubmit = (values) => {
     const { dispatch } = props;
+    console.log('Login Details', values);
+    // dispatch({
+    //   type: 'login/login',
+    //   payload: { ...values, type },
+    // });
+
     dispatch({
-      type: 'login/login',
-      payload: { ...values, type },
+      type: 'userAndlogin/login',
+      payload: {
+        clients: { ...values, type },
+      },
     });
   };
 
@@ -77,25 +92,26 @@ const Login = (props) => {
           />
         </Tabs>
 
-        {status === 'error' && loginType === 'account' && !submitting && (
+        {status === 'Inavlid email or password' || "error" && loginType === 'account' && !submitting && (
           <LoginMessage
             content={intl.formatMessage({
               id: 'pages.login.accountLogin.errorMessage',
-              defaultMessage: '账户或密码错误（admin/ant.design)',
+              // defaultMessage: '账户或密码错误（admin/ant.design)',
             })}
           />
         )}
         {type === 'account' && (
           <>
             <ProFormText
-              name="userName"
+              // name="userName"
+              name="login"
               fieldProps={{
                 size: 'large',
                 prefix: <UserOutlined className={styles.prefixIcon} />,
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.username.placeholder',
-                defaultMessage: '用户名: admin or user',
+                // defaultMessage: '用户名: admin or user',
               })}
               rules={[
                 {
@@ -103,7 +119,7 @@ const Login = (props) => {
                   message: (
                     <FormattedMessage
                       id="pages.login.username.required"
-                      defaultMessage="请输入用户名!"
+                    // defaultMessage="请输入用户名!"
                     />
                   ),
                 },
@@ -117,7 +133,7 @@ const Login = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.password.placeholder',
-                defaultMessage: '密码: ant.design',
+                // defaultMessage: '密码: ant.design',
               })}
               rules={[
                 {
@@ -125,7 +141,7 @@ const Login = (props) => {
                   message: (
                     <FormattedMessage
                       id="pages.login.password.required"
-                      defaultMessage="请输入密码！"
+                    // defaultMessage="请输入密码！"
                     />
                   ),
                 },
@@ -236,17 +252,43 @@ const Login = (props) => {
           </a>
         </div>
       </ProForm>
-      <Space className={styles.other}>
+      {/* <Space className={styles.other}>
         <FormattedMessage id="pages.login.loginWith" defaultMessage="其他登录方式" />
         <AlipayCircleOutlined className={styles.icon} />
         <TaobaoCircleOutlined className={styles.icon} />
         <WeiboCircleOutlined className={styles.icon} />
-      </Space>
+      </Space> */}
+
+      <div className={styles.hrLine}>
+        <div>
+          <hr />
+        </div>
+        <div>
+          <span>OR</span>
+        </div>
+        <div>
+          <hr />
+        </div>
+      </div>
+
+      <div className={styles.googleButton}>
+        <i class="fab fa-google" style={{ fontSize: "16px", color: "#E13131", marginRight: "12px" }}></i>
+        <span> Google</span>
+      </div>
+
+      <div className={styles.doesHaveAccount}>
+        <span>Don’t have account?   <span style={{ fontWeight: "bold", borderBottom: "2px solid rgba(71, 90, 122, 1)" }}>Sign Up Now</span> </span>
+      </div>
+
     </div>
+
+
   );
 };
 
-export default connect(({ login, loading }) => ({
+export default connect(({ login, loading, userAndlogin }) => ({
   userLogin: login,
-  submitting: loading.effects['login/login'],
+  userAndlogin,
+  // submitting: loading.effects['login/login'],
+  submitting: loading.effects['userAndlogin/login'],
 }))(Login);

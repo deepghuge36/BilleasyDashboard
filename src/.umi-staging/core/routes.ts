@@ -8,16 +8,20 @@ import LoadingComponent from '@/components/PageLoading/index';
 export function getRoutes() {
   const routes = [
   {
-    "path": "/",
     "component": dynamic({ loader: () => import(/* webpackChunkName: 'layouts__BlankLayout' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/layouts/BlankLayout'), loading: LoadingComponent}),
     "routes": [
+      {
+        "path": "/",
+        "redirect": "/user/login",
+        "exact": true
+      },
       {
         "path": "/user",
         "component": dynamic({ loader: () => import(/* webpackChunkName: 'layouts__UserLayout' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/layouts/UserLayout'), loading: LoadingComponent}),
         "routes": [
           {
             "path": "/user/login",
-            "name": "login",
+            "name": "Login",
             "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__User__login' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/login'), loading: LoadingComponent}),
             "exact": true
           },
@@ -58,14 +62,9 @@ export function getRoutes() {
         ],
         "routes": [
           {
-            "path": "/",
-            "redirect": "/dashboard/analysis",
-            "exact": true
-          },
-          {
             "path": "/dashboard",
-            "name": "dashboard",
-            "icon": "dashboard",
+            "name": "home",
+            "icon": "home",
             "routes": [
               {
                 "path": "/",
@@ -73,21 +72,21 @@ export function getRoutes() {
                 "exact": true
               },
               {
-                "name": "analysis",
+                "name": "Activity View",
                 "icon": "smile",
                 "path": "/dashboard/analysis",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__dashboard__analysis' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/analysis'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "monitor",
+                "name": "Updates",
                 "icon": "smile",
                 "path": "/dashboard/monitor",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__dashboard__monitor' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "workplace",
+                "name": "Top Widgets",
                 "icon": "smile",
                 "path": "/dashboard/workplace",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__dashboard__workplace' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/workplace'), loading: LoadingComponent}),
@@ -98,7 +97,7 @@ export function getRoutes() {
           {
             "path": "/form",
             "icon": "form",
-            "name": "form",
+            "name": "Analysis",
             "routes": [
               {
                 "path": "/",
@@ -106,24 +105,38 @@ export function getRoutes() {
                 "exact": true
               },
               {
-                "name": "basic-form",
+                "name": "Campaigns & Analysis",
                 "icon": "smile",
                 "path": "/form/basic-form",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__form__basic-form' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/basic-form'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "step-form",
+                "name": "Customer Profiling",
                 "icon": "smile",
                 "path": "/form/step-form",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__form__step-form' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "advanced-form",
+                "name": "Product Profiling",
                 "icon": "smile",
                 "path": "/form/advanced-form",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__form__advanced-form' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/advanced-form'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "name": "Territory Profiling",
+                "icon": "smile",
+                "path": "/form/territory-profile",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__form__territory-profile' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/territory-profile'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "name": "Sale Profiling",
+                "icon": "smile",
+                "path": "/form/sale-profile",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__form__sale-profile' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/sale-profile'), loading: LoadingComponent}),
                 "exact": true
               }
             ]
@@ -131,62 +144,17 @@ export function getRoutes() {
           {
             "path": "/list",
             "icon": "table",
-            "name": "list",
+            "name": "Inventory",
             "routes": [
               {
-                "path": "/list/search",
-                "name": "search-list",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__search' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/search'), loading: LoadingComponent}),
-                "routes": [
-                  {
-                    "path": "/list/search",
-                    "redirect": "/list/search/articles",
-                    "exact": true
-                  },
-                  {
-                    "name": "articles",
-                    "icon": "smile",
-                    "path": "/list/search/articles",
-                    "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__search__articles' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/search/articles'), loading: LoadingComponent}),
-                    "exact": true
-                  },
-                  {
-                    "name": "projects",
-                    "icon": "smile",
-                    "path": "/list/search/projects",
-                    "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__search__projects' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/search/projects'), loading: LoadingComponent}),
-                    "exact": true
-                  },
-                  {
-                    "name": "applications",
-                    "icon": "smile",
-                    "path": "/list/search/applications",
-                    "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__search__applications' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/search/applications'), loading: LoadingComponent}),
-                    "exact": true
-                  }
-                ]
-              },
-              {
-                "path": "/",
-                "redirect": "/list/table-list",
-                "exact": true
-              },
-              {
-                "name": "table-list",
-                "icon": "smile",
-                "path": "/list/table-list",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__table-list' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/table-list'), loading: LoadingComponent}),
-                "exact": true
-              },
-              {
-                "name": "basic-list",
+                "name": "Data",
                 "icon": "smile",
                 "path": "/list/basic-list",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__basic-list' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/basic-list'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "card-list",
+                "name": "Metrics",
                 "icon": "smile",
                 "path": "/list/card-list",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__list__card-list' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/list/card-list'), loading: LoadingComponent}),
@@ -196,7 +164,7 @@ export function getRoutes() {
           },
           {
             "path": "/profile",
-            "name": "profile",
+            "name": "Customers",
             "icon": "profile",
             "routes": [
               {
@@ -205,14 +173,14 @@ export function getRoutes() {
                 "exact": true
               },
               {
-                "name": "basic",
+                "name": "Data",
                 "icon": "smile",
                 "path": "/profile/basic",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__profile__basic' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/profile/basic'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "advanced",
+                "name": "Matrics",
                 "icon": "smile",
                 "path": "/profile/advanced",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__profile__advanced' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/profile/advanced'), loading: LoadingComponent}),
@@ -221,24 +189,36 @@ export function getRoutes() {
             ]
           },
           {
-            "name": "result",
+            "path": "/orders",
+            "name": "Orders",
+            "icon": "profile",
+            "routes": [
+              {
+                "path": "/orders",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__orders' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/orders'), loading: LoadingComponent}),
+                "exact": true
+              }
+            ]
+          },
+          {
+            "name": "Bills",
             "icon": "CheckCircleOutlined",
-            "path": "/result",
+            "path": "/bills",
             "routes": [
               {
                 "path": "/",
-                "redirect": "/result/success",
+                "redirect": "/bills/data",
                 "exact": true
               },
               {
-                "name": "success",
+                "name": "Data",
                 "icon": "smile",
-                "path": "/result/success",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__result__success' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/success'), loading: LoadingComponent}),
+                "path": "/bills/data",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__bills__data' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/bills/data'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "fail",
+                "name": "Metrics",
                 "icon": "smile",
                 "path": "/result/fail",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__result__fail' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/fail'), loading: LoadingComponent}),
@@ -247,7 +227,7 @@ export function getRoutes() {
             ]
           },
           {
-            "name": "exception",
+            "name": "Promotions",
             "icon": "warning",
             "path": "/exception",
             "routes": [
@@ -257,30 +237,37 @@ export function getRoutes() {
                 "exact": true
               },
               {
-                "name": "403",
+                "name": "Campaigns",
                 "icon": "smile",
                 "path": "/exception/403",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__exception__403' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/403'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "404",
+                "name": "Feedbacks",
                 "icon": "smile",
                 "path": "/exception/404",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__exception__404' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/404'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "500",
+                "name": "WhatsApp Support",
                 "icon": "smile",
                 "path": "/exception/500",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__exception__500' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "name": "Digital Loyalty Card",
+                "icon": "smile",
+                "path": "/exception/digitalLoyalty",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__exception__digitalLoyalty' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/digitalLoyalty'), loading: LoadingComponent}),
                 "exact": true
               }
             ]
           },
           {
-            "name": "account",
+            "name": "Stores",
             "icon": "user",
             "path": "/account",
             "routes": [
@@ -290,50 +277,36 @@ export function getRoutes() {
                 "exact": true
               },
               {
-                "name": "center",
+                "name": "Data",
                 "icon": "smile",
                 "path": "/account/center",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__account__center' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/center'), loading: LoadingComponent}),
                 "exact": true
               },
               {
-                "name": "settings",
+                "name": "Micro eComm",
                 "icon": "smile",
                 "path": "/account/settings",
                 "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__account__settings' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/settings'), loading: LoadingComponent}),
+                "exact": true
+              },
+              {
+                "name": "Offline Plugin",
+                "icon": "smile",
+                "path": "/account/offlinePlugin",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__account__offlinePlugin' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/offlinePlugin'), loading: LoadingComponent}),
                 "exact": true
               }
             ]
           },
           {
-            "name": "editor",
+            "name": "Settings",
             "icon": "highlight",
             "path": "/editor",
             "routes": [
               {
-                "path": "/",
-                "redirect": "/editor/flow",
-                "exact": true
-              },
-              {
-                "name": "flow",
-                "icon": "smile",
-                "path": "/editor/flow",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__editor__flow' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/flow'), loading: LoadingComponent}),
-                "exact": true
-              },
-              {
-                "name": "mind",
-                "icon": "smile",
-                "path": "/editor/mind",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__editor__mind' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/mind'), loading: LoadingComponent}),
-                "exact": true
-              },
-              {
-                "name": "koni",
-                "icon": "smile",
-                "path": "/editor/koni",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__editor__koni' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/koni'), loading: LoadingComponent}),
+                "path": "/editor",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__editor' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor'), loading: LoadingComponent}),
                 "exact": true
               }
             ]

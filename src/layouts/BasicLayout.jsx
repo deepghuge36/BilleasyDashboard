@@ -8,10 +8,12 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
+import Cookies from 'js-cookie';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
+
 const noMatch = (
   <Result
     status={403}
@@ -71,13 +73,43 @@ const BasicLayout = (props) => {
     },
   } = props;
   const menuDataRef = useRef([]);
+  // useEffect(() => {
+  //   if (dispatch) {
+  //     dispatch({
+  //       type: 'user/fetchCurrent',
+  //     });
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (dispatch) {
+    // const {userAndlogin} =this.props;
+
+    const currentAuth = Cookies.get('BAUT');
+
+    if (currentAuth === undefined) {
+      history.push('/user/login');
+    } else if (dispatch) {
       dispatch({
-        type: 'user/fetchCurrent',
+        type: 'user/verifyAuth',
+        payload: {
+          client: {
+            auth: currentAuth,
+          },
+        },
+      }).then((res) => {
+        console.log('current auth', res);
+        if (res) {
+          dispatch({
+            type: 'storeModel/getStoreList',
+            payload: {
+              user_client_id: res,
+            },
+          });
+        }
       });
     }
-  }, []);
+
+  }, [dispatch]);
   /** Init variables */
 
   const handleMenuCollapse = (payload) => {
@@ -165,7 +197,8 @@ const BasicLayout = (props) => {
   );
 };
 
-export default connect(({ global, settings }) => ({
+export default connect(({ global, settings, userAndlogin }) => ({
   collapsed: global.collapsed,
   settings,
+  userAndlogin
 }))(BasicLayout);

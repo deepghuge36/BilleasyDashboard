@@ -3,7 +3,9 @@ import { history } from 'umi';
 import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
-import { message } from 'antd';
+import { clientLogin } from '@/pages/user/login/service';
+import Cookies from 'js-cookie';
+
 const Model = {
   namespace: 'login',
   state: {
@@ -11,16 +13,16 @@ const Model = {
   },
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      const response = yield call(clientLogin, payload);
       yield put({
-        type: 'changeLoginStatus',
-        payload: response,
+        type: 'save',
+        payload: response.data,
       }); // Login successfully
 
       if (response.status === 'ok') {
+        Cookies.set('BAUT', response.data.authentication_token);
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
-        message.success('🎉 🎉 🎉  登录成功！');
         let { redirect } = params;
 
         if (redirect) {
@@ -44,7 +46,12 @@ const Model = {
 
     logout() {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
-
+      setTimeout(() => {
+        Cookies.remove('BAUT');
+        Cookies.remove('StoreId');
+        Cookies.remove('BEmail');
+        Cookies.remove('pageStoreID');
+      }, 100);
       if (window.location.pathname !== '/user/login' && !redirect) {
         history.replace({
           pathname: '/user/login',

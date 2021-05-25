@@ -51,39 +51,9 @@ export const localeInfo: {[key: string]: any} = {
     },
     momentLocale: '',
   },
-  'id-ID': {
-    messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/locales/id-ID.js')),
-    },
-    locale: 'id-ID',
-    antd: {
-      ...require('antd/es/locale/id_ID').default,
-    },
-    momentLocale: 'id',
-  },
-  'ja-JP': {
-    messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/locales/ja-JP.js')),
-    },
-    locale: 'ja-JP',
-    antd: {
-      ...require('antd/es/locale/ja_JP').default,
-    },
-    momentLocale: 'ja',
-  },
-  'pt-BR': {
-    messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/analysis/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/basic-form/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form/locales/pt-BR.js')),
-    },
-    locale: 'pt-BR',
-    antd: {
-      ...require('antd/es/locale/pt_BR').default,
-    },
-    momentLocale: 'pt-br',
-  },
   'zh-CN': {
     messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/settings/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/analysis/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/flow/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/koni/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/mind/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/basic-form/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/fail/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/success/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register-result/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register/locales/zh-CN.js')),
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/settings/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/flow/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/koni/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/editor/mind/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/fail/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/success/locales/zh-CN.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register/locales/zh-CN.js')),
     },
     locale: 'zh-CN',
     antd: {
@@ -93,13 +63,23 @@ export const localeInfo: {[key: string]: any} = {
   },
   'zh-TW': {
     messages: {
-      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/settings/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/analysis/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/basic-form/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/fail/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/success/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register-result/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register/locales/zh-TW.js')),
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/account/settings/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/fail/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/result/success/locales/zh-TW.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/User/register/locales/zh-TW.js')),
     },
     locale: 'zh-TW',
     antd: {
       ...require('antd/es/locale/zh_TW').default,
     },
     momentLocale: 'zh-tw',
+  },
+  'pt-BR': {
+    messages: {
+      ...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/dashboard/monitor/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/exception/500/locales/pt-BR.js')),...((locale) => locale.__esModule ? locale.default : locale)(require('/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/form/step-form/locales/pt-BR.js')),
+    },
+    locale: 'pt-BR',
+    antd: {
+      ...require('antd/es/locale/pt_BR').default,
+    },
+    momentLocale: 'pt-br',
   },
 };
 
@@ -155,11 +135,11 @@ export const getIntl = (locale?: string, changeIntl?: boolean) => {
     `The current popular language does not exist, please check the locales folder!`,
   );
   // 使用 zh-CN
-  if (localeInfo["zh-CN"]) return createIntl(localeInfo["zh-CN"]);
+  if (localeInfo["en-US"]) return createIntl(localeInfo["en-US"]);
 
   // 如果还没有，返回一个空的
   return createIntl({
-    locale: "zh-CN",
+    locale: "en-US",
     messages: {},
   });
 };
@@ -199,7 +179,7 @@ export const getLocale = () => {
   browserLang = isNavigatorLanguageValid
     ? navigator.language.split('-').join('-')
     : '';
-  return lang || browserLang || "zh-CN";
+  return lang || browserLang || "en-US";
 };
 
 

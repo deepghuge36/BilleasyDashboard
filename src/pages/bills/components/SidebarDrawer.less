@@ -1,0 +1,250 @@
+.mainDrawer {
+  :global {
+    .ant-drawer-body {
+      margin-bottom: 66px;
+      padding      : 34px;
+    }
+
+    .ant-drawer-header {
+      padding: 31px 36px 0;
+    }
+
+    .ant-drawer-content {
+      background-color: #1c283a;
+    }
+
+    .ant-drawer-header {
+      background-color: #0f1721;
+    }
+  }
+}
+
+.sidebarTitle {
+
+  h2,
+  h4 {
+    color      : #5066d8;
+    line-height: normal;
+  }
+
+  p {
+    // font-size  : 13px;
+    line-height: normal;
+  }
+
+  .headDetails {
+    display        : flex;
+    justify-content: space-between;
+  }
+
+  .payment {
+    float         : right;
+    border-radius : 20px;
+    text-transform: capitalize;
+    font-weight   : normal;
+
+    color  : #ffffff;
+    padding: 0 15px;
+  }
+
+  .otherpayment {
+    float         : right;
+    border-radius : 20px;
+    text-transform: capitalize;
+    font-weight   : normal;
+
+    color              : #0F1721;
+    padding            : 0 15px;
+    // background-color: #7285A8;
+  }
+
+  .infoDetails {
+    display: flex;
+    flex   : 50%;
+
+    :first-child {
+      flex-grow: 1;
+    }
+
+    :nth-child(2) {
+      flex-grow: 2;
+    }
+
+    p {
+      color: #eaf2ff;
+    }
+  }
+}
+
+.ListWrapper {
+  .quantity {
+    flex               : 1;
+    max-width          : max-content;
+    border-radius      : 3px;
+    // background-color: #e8e8e8;
+
+    font-weight: 300;
+    color      : #eaf2ff;
+    padding    : 4px 10px;
+  }
+
+  .amount {
+    flex      : 1;
+    text-align: right;
+
+    font-weight: 300;
+    color      : #eaf2ff;
+  }
+
+  .quantityTitle {
+    flex               : 1;
+    max-width          : max-content;
+    border-radius      : 3px;
+    // background-color: #FFFFFF;
+    font-size          : 14px;
+    font-weight        : 600;
+    text-transform     : uppercase;
+    color              : #475a7a;
+    line-height        : 3;
+    padding            : 4px 5px;
+  }
+
+  .amountTitle {
+    flex          : 1;
+    //
+    font-size     : 14px;
+    font-weight   : bold;
+    line-height   : 2;
+    text-align    : right;
+    text-transform: uppercase;
+    color         : #475a7a;
+  }
+
+  .itemTitle {
+
+    // flex: 1;
+    //
+    // font-size: 14px;
+    // font-weight: bold;
+    // line-height: 2;
+    // text-align: left;
+    // color: @heading-color;
+    :global {
+      .ant-list-item {
+        .ant-list-item-meta-title {
+          padding      : 0px;
+          font-weight  : 600 !important;
+          border-bottom: 1px solid #475a7a;
+        }
+      }
+    }
+  }
+
+  :global {
+    .ant-list-header {
+      padding: 0px;
+    }
+
+    .ant-list-item {
+      padding      : 2px;
+      border-bottom: 0.3px solid #475a7a !important;
+
+      .ant-list-item-content {
+        padding-left: 10px;
+      }
+
+      .ant-list-item-meta {
+        min-width: 225px;
+      }
+
+      .ant-list-item-meta-title {
+        font-weight   : 500;
+        text-transform: uppercase;
+        color         : #475a7a;
+      }
+
+      .ant-list-item-meta-description {
+        padding    : 0px;
+        font-weight: 300;
+        color      : #eaf2ff;
+      }
+
+      // .ant-list-item-meta-description {
+      //   text-overflow: ellipsis;
+      //   overflow: hidden;
+      //   white-space: nowrap;
+      //   width: 185px;
+      // }
+    }
+  }
+}
+
+.particulrLeftOver {
+  display          : flex;
+  padding          : 10px 0;
+  text-transform   : capitalize;
+  // border-top    : 1px solid #e8e8e8;
+
+  .leftdata {
+    font-weight: 500;
+    color      : #7285a8;
+    flex       : 1;
+
+    .title {
+      font-weight: 500;
+    }
+
+    .subTitle {
+      // opacity: 0.7;
+    }
+  }
+
+  .rightdata {
+
+    font-weight: 500;
+    text-align : right;
+    color      : #eaf2ff;
+    flex       : 1;
+  }
+
+  .boldTotal {
+    font-size : 20px;
+    text-align: right;
+    color     : #5066d8;
+    flex      : 1;
+  }
+}
+
+.drawerFooter {
+  position        : absolute;
+  bottom          : 0px;
+  left            : 0;
+  width           : 100%;
+  height          : auto;
+  text-align      : right;
+  margin          : 0px;
+  padding         : 20px;
+  background-color: #31415a;
+
+  .deletebtn {
+    text-transform: uppercase;
+    background    : #7285a8;
+    font-style    : normal;
+    font-weight   : 500;
+    font-size     : 14px;
+    line-height   : normal;
+    color         : #ffffff;
+    padding       : 5px 30px;
+  }
+
+  .ogbillbtn {
+    text-transform: uppercase;
+    background    : #5066d8;
+    font-style    : normal;
+    font-weight   : 500;
+    font-size     : 14px;
+    line-height   : normal;
+    color         : #ffffff;
+    padding       : 5px 10px;
+  }
+}

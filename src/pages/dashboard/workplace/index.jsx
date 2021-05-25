@@ -130,14 +130,8 @@ class Workplace extends Component {
   };
 
   render() {
-    const {
-      currentUser,
-      activities,
-      projectNotice,
-      projectLoading,
-      activitiesLoading,
-      radarData,
-    } = this.props;
+    const { currentUser, activities, projectNotice, projectLoading, activitiesLoading, radarData } =
+      this.props;
 
     if (!currentUser || !currentUser.userid) {
       return null;
