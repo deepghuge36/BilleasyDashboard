@@ -113,7 +113,8 @@ const Step2 = (props) => {
         }}
       >
         <Button type="primary" onClick={onValidateForm} loading={submitting}>
-          提交
+          {/* 提交 */}
+          Submit
         </Button>
         <Button
           onClick={onPrev}

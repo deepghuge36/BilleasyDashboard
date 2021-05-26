@@ -11,6 +11,5 @@ const proSettings = {
   title: 'Billeasy',
   pwa: false,
   iconfontUrl: '',
-  language: 'en-US',
 };
 export default proSettings;

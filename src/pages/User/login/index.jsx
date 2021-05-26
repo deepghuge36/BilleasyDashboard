@@ -64,6 +64,7 @@ const Login = (props) => {
           render: (_, dom) => dom.pop(),
           submitButtonProps: {
             loading: submitting,
+            defaultValue:"Submit",
             size: 'large',
             style: {
               width: '100%',
@@ -116,12 +117,7 @@ const Login = (props) => {
               rules={[
                 {
                   required: true,
-                  message: (
-                    <FormattedMessage
-                      id="pages.login.username.required"
-                    // defaultMessage="请输入用户名!"
-                    />
-                  ),
+                  message: "Password Required!",
                 },
               ]}
             />
@@ -252,6 +248,7 @@ const Login = (props) => {
           </a>
         </div>
       </ProForm>
+      <div>Login</div>
       {/* <Space className={styles.other}>
         <FormattedMessage id="pages.login.loginWith" defaultMessage="其他登录方式" />
         <AlipayCircleOutlined className={styles.icon} />
@@ -270,11 +267,11 @@ const Login = (props) => {
           <hr />
         </div>
       </div>
-
+{/* 
       <div className={styles.googleButton}>
         <i class="fab fa-google" style={{ fontSize: "16px", color: "#E13131", marginRight: "12px" }}></i>
         <span> Google</span>
-      </div>
+      </div> */}
 
       <div className={styles.doesHaveAccount}>
         <span>Don’t have account?   <span style={{ fontWeight: "bold", borderBottom: "2px solid rgba(71, 90, 122, 1)" }}>Sign Up Now</span> </span>

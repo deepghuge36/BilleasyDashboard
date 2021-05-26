@@ -8,6 +8,7 @@ const updateColorWeak = (colorWeak) => {
   }
 };
 
+
 const SettingModel = {
   namespace: 'settings',
   state: defaultSettings,
