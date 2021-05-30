@@ -64,7 +64,7 @@ const Login = (props) => {
           render: (_, dom) => dom.pop(),
           submitButtonProps: {
             loading: submitting,
-            defaultValue:"Submit",
+            defaultValue: "Submit",
             size: 'large',
             style: {
               width: '100%',
@@ -81,14 +81,14 @@ const Login = (props) => {
             key="account"
             tab={intl.formatMessage({
               id: 'pages.login.accountLogin.tab',
-              defaultMessage: '账户密码登录',
+              defaultMessage: 'Login',
             })}
           />
           <Tabs.TabPane
             key="mobile"
             tab={intl.formatMessage({
               id: 'pages.login.phoneLogin.tab',
-              defaultMessage: '手机号登录',
+              defaultMessage: 'Sign Up',
             })}
           />
         </Tabs>
@@ -112,7 +112,7 @@ const Login = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.username.placeholder',
-                // defaultMessage: '用户名: admin or user',
+                defaultMessage: 'Email Id',
               })}
               rules={[
                 {
@@ -129,7 +129,7 @@ const Login = (props) => {
               }}
               placeholder={intl.formatMessage({
                 id: 'pages.login.password.placeholder',
-                // defaultMessage: '密码: ant.design',
+                defaultMessage: 'Password',
               })}
               rules={[
                 {
@@ -237,14 +237,14 @@ const Login = (props) => {
           }}
         >
           <ProFormCheckbox noStyle name="autoLogin">
-            <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
+            <FormattedMessage id="pages.login.rememberMe" defaultMessage="Remember Me" />
           </ProFormCheckbox>
           <a
             style={{
               float: 'right',
             }}
           >
-            <FormattedMessage id="pages.login.forgotPassword" defaultMessage="忘记密码" />
+            <FormattedMessage id="pages.login.forgotPassword" defaultMessage="Forgot Password" />
           </a>
         </div>
       </ProForm>
@@ -267,7 +267,7 @@ const Login = (props) => {
           <hr />
         </div>
       </div>
-{/* 
+      {/*
       <div className={styles.googleButton}>
         <i class="fab fa-google" style={{ fontSize: "16px", color: "#E13131", marginRight: "12px" }}></i>
         <span> Google</span>

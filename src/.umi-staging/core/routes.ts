@@ -163,27 +163,27 @@ export function getRoutes() {
             ]
           },
           {
-            "path": "/profile",
+            "path": "/customer",
             "name": "Customers",
             "icon": "profile",
             "routes": [
               {
                 "path": "/",
-                "redirect": "/profile/basic",
+                "redirect": "/customer/data",
                 "exact": true
               },
               {
                 "name": "Data",
                 "icon": "smile",
-                "path": "/profile/basic",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__profile__basic' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/profile/basic'), loading: LoadingComponent}),
+                "path": "/customer/data",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__customer__data' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/customer/data'), loading: LoadingComponent}),
                 "exact": true
               },
               {
                 "name": "Matrics",
                 "icon": "smile",
-                "path": "/profile/advanced",
-                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__profile__advanced' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/profile/advanced'), loading: LoadingComponent}),
+                "path": "/customer/matrics",
+                "component": dynamic({ loader: () => import(/* webpackChunkName: 'p__customer__matrics' */'/Users/billeasysmacmini5/Desktop/antd pro js/Billeasy/src/pages/customer/matrics'), loading: LoadingComponent}),
                 "exact": true
               }
             ]

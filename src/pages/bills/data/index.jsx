@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable no-nested-ternary */
 import { SearchOutlined, DownOutlined } from '@ant-design/icons';
-import { Button, DatePicker, Input, message, Popover, Space, Table, Tag, Modal, Tabs, Row, Col, Menu, Dropdown, Select, Switch, Checkbox } from 'antd';
-import { connect } from 'umi';
+import { Button, DatePicker, Input, message, Popover, Space, Table, Tag, Modal, Tabs, Row, Col, Menu, Dropdown, Select, Switch, Checkbox, Slider } from 'antd';
+import { connect, FormattedMessage, formatMessage } from 'umi';
 import React, { useState, useEffect } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { getFilterDate, getFormattedDate } from '@/utils/utils';
@@ -22,6 +22,7 @@ const { RangePicker } = DatePicker;
 const { confirm } = Modal;
 
 const BillsTable = (props) => {
+
   const [bill, setbill] = useState({
     selectedBill: {},
   })
@@ -53,13 +54,14 @@ const BillsTable = (props) => {
   const [key, setKey] = useState({
     tab: '0',
   });
-  const { dispatch, billsModel, loading, user, exportLoading, storeModel } = props;
+  const { dispatch, billsModel, loading, user, exportLoading, sendEmail, storeModel } = props;
   const { stores = [] } = storeModel;
   const { currentUser } = user;
   const { user_type, user_client_id } = currentUser;
-  const { bills = [], meta = [], aggrClientBill } = billsModel;
+  const { bills = [], meta = [], aggrClientBill = [] } = billsModel;
   const { total_count } = meta || 0;
-  console.log("sum_of_grand_total", aggrClientBill);
+  const { total_sales_count, sum_of_grand_total } = aggrClientBill
+  // console.log("sum_of_grand_total", aggrClientBill);
   // const { sum_of_grand_total||0, total_sales_count||0 } = aggrClientBill
 
   // console.log(billsModel.meta.total_count, "total_count")
@@ -216,7 +218,7 @@ const BillsTable = (props) => {
   const { company_name } = billsModel;
   const fiveAsecStatus = [{ text: 'B2B - CHECK', value: 'B2B - CHECK' }, { text: 'CASH', value: 'CASH' }, { text: 'CREDIT CARD', value: 'CREDIT CARD' }, { text: 'GIFT VOUCHER', value: 'GIFT VOUCHER' }, { text: 'PAYTM', value: 'PAYTM' }, { text: 'QUICK WALLET', value: 'QUICK WALLET' }, { text: 'RAZORPAY - BILLEASY', value: 'RAZORPAY - BILLEASY' }, { text: 'BALANCE CLEARED', value: 'BALANCE CLEARED' }, { text: 'AMEX CARD', value: 'AMEX CARD' }];
   const otherStatus = [{ text: 'Order Created', value: 'issued' }, { text: 'Paid', value: 'paid' }];
-
+  const { popStoreID } = metrix
   const operatorColumn = [{
     title: 'Operator',
     dataIndex: 'operator_name',
@@ -753,6 +755,7 @@ const BillsTable = (props) => {
       ...prevState,
       popStoreID: id,
     }));
+    console.log(`selected ${id}`);
   }
 
   const popMetricsChange = (id) => {
@@ -763,7 +766,7 @@ const BillsTable = (props) => {
     }));
   }
 
-  const Storeselect = stores.filter(item => metrix.popStoreID == item.id)[0] || 'All store';
+  const Storeselect = (stores.filter(item => metrix.popStoreID == item.id)[0] || 'All store')
 
   const popStart = (selectedDate) => {
     setmetrix(prevState => ({
@@ -813,6 +816,8 @@ const BillsTable = (props) => {
         user_client_id: user.currentUser.user_client_id,
         type: 'skip_analytics',
         store_id: popStoreID === 'all' ? undefined : popStoreID,
+
+
       },
     }).then((res) => {
       if (res.success === true) {
@@ -867,190 +872,278 @@ const BillsTable = (props) => {
     // selectedRowKeys,
     onChange: onSelectChange,
   };
-  return (
-    <div className={styles.billsPage}>
-      {/* <PageContainer fixedHeader title={false} > */}
-      <Row gutter={[12]} >
-        <Col md={24}>
-          <StoreViewer data={stores || []} onChange={onStoreChange} selected={store} />
-        </Col>
-        {/* <Col md={24} >
-          <div className={styles.headerControl}>
-            <h4 className={styles.title}>Bills</h4>
-            <Space>
-              <RangePicker
-                allowClear={false}
-                onChange={searchDate}
-                className={styles.billSearch}
-              />
-              <Input.Group compact>
-                <Select defaultValue="Name" >
-                  <Select.Option value="Name">Name</Select.Option>
-                  <Select.Option value="Mobile">Mobile</Select.Option>
-                </Select>
-                <Input style={{ width: '200px' }} placeholder="Quick Search" onPressEnter={searchKeyword} onChange={searchKeyword} className={styles.inputSearch} />
-              </Input.Group>
-              <Button loading={exportLoading} type="primary" shape="round"
-                //onClick={() => setcsv(true)}
-                onClick={exportBill}
-                className={styles.exportCSV}>
-                <i className="fas fa-arrow-to-bottom" />
-                 &nbsp;
-                 Export
-               </Button>
-              <Dropdown arrow overlay={menu} placement="bottomCenter" trigger={['click']} getPopupContainer={trigger => trigger.parentNode}>
-                <Button style={{ borderRadius: '50px' }}>
-                  <i className="far fa-ellipsis-v" />
-                </Button>
-              </Dropdown>
-            </Space>
-          </div>
-        </Col> */}
-      </Row>
-      <Tabs
-        onChange={callback}
-        activeKey={key.tab}
-        type="card"
-        destroyInactiveTabPane
-      // defaultActiveKey={1}
-      >
-        <TabPane tab="Bill Details" key="0">
-          <div className={styles.BillControlsWrapper}>
-            <Space>
-              <RangePicker
-                allowClear={false}
-                onChange={searchDate}
-                className={styles.billSearch}
-              />
-              {/* <Input
-                placeholder="Quick Search"
-                value={keyword}
-                className={styles.billSearch}
-                prefix={<SearchOutlined />}
-                onPressEnter={searchKeyword}
-                onChange={searchKeyword}
-                suffix={suffix}
-              /> */}
-              <Input.Group compact>
-                <Select defaultValue="full_name" onChange={searchBy}>
-                  <Select.Option value="full_name">Name</Select.Option>
-                  <Select.Option value="mobile_number">Mobile</Select.Option>
-                  <Select.Option value="invoice_number">Invoice No</Select.Option>
-                </Select>
-                <Input
-                  style={{ width: '200px' }}
-                  placeholder="Quick Search"
-                  onPressEnter={searchKeyword}
-                  // onChange={searchKeyword}
-                  className={styles.inputSearch}
-                />
-              </Input.Group>
-              <Button loading={exportLoading} type="primary" shape="round"
-                onClick={exportBill}
-                className={styles.exportCSV}>
-                <i className="fas fa-arrow-to-bottom" />
-                 &nbsp;
-                 Export
-               </Button>
-              {/* <Button type="default" shape="round" onClick={resetTable} className={styles.billSearch}>
-                Reset
-               </Button> */}
-              <Dropdown arrow overlay={menu} placement="bottomCenter" trigger={['click']} getPopupContainer={trigger => trigger.parentNode}>
-                <Button style={{ borderRadius: '50px' }}>
-                  <i className="far fa-ellipsis-v" />
-                </Button>
-              </Dropdown>
-            </Space>
-          </div>
-          <Table
-            rowSelection={rowSelection}
-            loading={loading}
-            className={styles.billsTable}
-            size="middle"
-            dataSource={bills}
-            columns={(currentUser.id == 8 || currentUser.id == 285) ? mcdlogin : columns}
-            rowKey={record => record.id}
-            onRow={(record) => {
-              return {
-                onClick: () => {
-                  setbill({
-                    selectedBill: record,
-                  });
-                },
-              };
-            }}
-            pagination={{
-              position: ["bottomCenter"],
-              size: "small",
-              total: total_count
-            }}
-            scroll={{ x: 1500, y: 570 }}
-            // expandable={{
-            //   expandedRowRender: (record) => <ExpanedTable data={record} />,
-            //   // rowExpandable: record => record.name !== 'Not Expandable',
-            // }}
-            onChange={tableChangeHandler}
-          />
-          {/* <div className={styles.avgCount} >
-            <div>Average: {parseInt(sum_of_grand_total / total_sales_count).toFixed(2)}</div>
-            <div>Count:{total_sales_count}</div>
-            <div>Sum:{sum_of_grand_total}</div>
-          </div> */}
-        </TabPane>
-        <TabPane tab="History Reports" key="1" >
-          <p>Analytics</p>
-        </TabPane>
-      </Tabs>
-      <Modal
-        visible={metrix.popup}
-        closable={false}
-        className={styles.exportmodal}
-        footer={[
-          <Button key="back" onClick={handleCancel} className={styles.cancelbtn}>
-            Cancel
-              </Button>,
-          <Button key="submit" type="primary" onClick={exportBillmatrix} className={styles.submitbtn}>
-            Email Export
-              </Button>,
-        ]}
-      >
-        <Row>
-          <Col span={16} style={{ padding: '30px 40px' }}>
-            <h3 className={styles.import}>Export CSV</h3>
-            <div style={{ display: 'flex', marginBottom: '30px' }}>
-              <div style={{ flexGrow: '1' }}>
-                <p className={styles.header1}>Date Range</p>
-                <p className={styles.header3}>From</p>
-                <DatePicker
-                  onChange={popStart}
-                  disabledDate={disabledDateForExp}
-                />
-                <p className={styles.header3} style={{ margin: '25px 0 13px' }}>To</p>
-                <DatePicker
-                  onChange={popEnd}
-                  disabledDate={disabledDateForExp}
-                />
-              </div>
-              <div style={{ flexGrow: '1', marginLeft: '70px' }}>
-                <p className={styles.header1}>Stores information</p>
-                <p className={styles.header3}>Choose Store  </p>
-                <Select
-                  showSearch
-                  style={{ width: 230 }}
-                  placeholder="Select store"
-                  optionFilterProp="children"
-                  onChange={popStoreChange}
-                  value={metrix.popStoreID || 'All Store'}
-                >
-                  {stores.length > 1 && (
-                    <Select.Option value="all">
-                      All Stores
-                    </Select.Option>
-                  )}
-                  {stores.map(str => (<Select.Option value={str.id} key={str.id} >{str.name}</Select.Option>))}
-                </Select>
+  const marks = {
+    0: {
+      label: <strong><i className="fal fa-rupee-sign" /> 0</strong>, //eslint-disable-line
+    },
+    19900: {
+      label: <strong><i className="fal fa-rupee-sign" /> {meta.maximum_price}</strong>, //eslint-disable-line
+    },
+  };
 
-                {/* <Select
+  const rangeFilter = (
+
+    <div className={styles.rangeFilterWrapper}>
+      <h3>Price Filter</h3>
+      <div className={styles.body}>
+        <Slider
+          min={0}
+          max={meta.maximum_price}
+          range
+          marks={marks}
+        // defaultValue={priceRange}
+        // value={priceRange}
+        // tipFormatter={this.formatter}
+        // tooltipVisible={visible}
+        // onChange={this.priceRangePicker}
+        />
+      </div>
+      <div className={styles.footer}>
+        <Button className={styles.cancelBtn} >CANCEL</Button>
+        <Button
+          className={styles.applyBtn}
+        // onClick={this.applyFilter}
+        // disabled={applyRangeFilterBtn}
+        >
+          APPLY FILTER
+        </Button>
+      </div>
+    </div>
+  );
+
+  const onSearch = value => console.log(value);
+
+  function handleChange(name) {
+    console.log(`selected ${name}`);
+  }
+
+  function arrayToList(array) {
+    return array
+      .join(", ")
+      .replace(/, ((?:.(?!, ))+)$/, ' and $1');
+  }
+  return (
+    <>
+      <div className={styles.billHeader}>
+
+        <p> <span className={styles.billHeaderTop}>Dashboard {">"} Bills {">"}</span> Data</p>
+        <div className={styles.billButton}>
+          <Button
+            className={styles.uploadCustomer}>
+            <i className="fas fa-arrow-to-top" />
+                 &nbsp;
+                 Upload Customer
+          </Button>
+          <Button loading={sendEmail} type="primary"
+
+            // onClick={exportBillmatrix}
+            onClick={() => setmetrix({ popup: true })}
+            className={styles.exportCSV}>
+            <i className="fas fa-arrow-to-bottom" />
+                 &nbsp;
+                 Export
+               </Button>
+        </div>
+        <h2>Data</h2>
+
+      </div>
+      <div className={styles.billsPage}>
+
+        <Tabs
+          onChange={callback}
+          activeKey={key.tab}
+          // type="card"
+          destroyInactiveTabPane
+          defaultActiveKey={1}
+        >
+          <TabPane tab="Bill Details" key="0">
+            <div className={styles.billsTopHeader}>
+              <div className={styles.BillControlsWrapper}>
+                <Space>Price:
+                <Dropdown overlay={rangeFilter} trigger={['click']}>
+                    <Button className={styles.filterBtn}>
+                      {/* <span></span> */}
+                      <span style={{ paddingLeft: 5 }}>{"Select"}</span>
+                      <i className="fas fa-caret-down" />
+                    </Button>
+                  </Dropdown>
+                Date Range:
+                <RangePicker
+                    // allowClear={false}
+                    onChange={searchDate}
+                    className={styles.billSearch}
+                  />
+                  <Button onClick={resetTable} type="primary">Reset</Button>
+                </Space>
+              </div>
+              <div className={styles.inputBox}>
+                <Input.Group compact>
+                  <Select defaultValue="full_name" onChange={searchBy}>
+                    <Select.Option value="full_name">Name</Select.Option>
+                    <Select.Option value="mobile_number">Mobile</Select.Option>
+                    <Select.Option value="invoice_number">Invoice No</Select.Option>
+                  </Select>
+
+                  <Input.Search
+                    style={{ width: '300px' }}
+                    placeholder="Search by Name, Bill, Phone..."
+                    onPressEnter={searchKeyword}
+                    onSearch={searchKeyword}
+                  // onChange={searchKeyword}
+                  // className={styles.inputSearch}
+                  />
+                </Input.Group>
+
+              </div>
+            </div>
+            <Table
+              rowSelection={rowSelection}
+              loading={loading}
+              className={styles.billsTable}
+              size="middle"
+              dataSource={bills}
+              columns={(currentUser.id == 8 || currentUser.id == 285) ? mcdlogin : columns}
+              rowKey={record => record.id}
+              onRow={(record) => {
+                return {
+                  onClick: () => {
+                    setbill({
+                      selectedBill: record,
+                    });
+                  },
+                };
+              }}
+              pagination={{
+                position: ["bottomCenter"],
+                size: "small",
+                total: total_count
+              }}
+              scroll={{ x: 1500, y: 570 }}
+              // expandable={{
+              //   expandedRowRender: (record) => <ExpanedTable data={record} />,
+              //   // rowExpandable: record => record.name !== 'Not Expandable',
+              // }}
+              onChange={tableChangeHandler}
+            />
+            <div className={styles.avgCount} >
+              <div>Average: {parseInt(sum_of_grand_total / total_sales_count).toFixed(2)}</div>
+              <div>Count:{total_sales_count}</div>
+              <div>Sum:{sum_of_grand_total}</div>
+            </div>
+          </TabPane>
+          <TabPane tab="History Reports" key="1" >
+            <p>Analytics</p>
+          </TabPane>
+        </Tabs>
+        <Modal
+          width={800}
+          visible={metrix.popup}
+          closable={false}
+          className={styles.exportmodal}
+          footer={[
+            <div className={styles.modalFooter}>
+              <span>Note: You will recieve the data on your email ID</span>
+              <div>
+                <Button key="back" onClick={handleCancel} className={styles.cancelbtn}>
+                  Cancel
+                </Button>
+                <Button key="submit" type="primary" onClick={exportBillmatrix} className={styles.submitbtn}>
+                  Export CSV
+                </Button>
+              </div>
+            </div>
+          ]}
+        >
+          <div className={styles.matrixPopup}>
+            <div>
+              <h2>Export CSV</h2>
+
+              <h3>Date Range</h3>
+
+
+              <Space >
+                <div className={styles.flex}>
+                  <span>Choose Date :</span>
+                  From
+                  <DatePicker
+                    onChange={popStart}
+                    disabledDate={disabledDateForExp}
+                    allowClear={false}
+                  >
+                  </DatePicker>
+                  To
+                  <DatePicker
+                    onChange={popEnd}
+                    disabledDate={disabledDateForExp}
+                    allowClear={false}
+                  />
+
+                </div>
+              </Space>
+
+
+
+            </div>
+            <div className={styles.matrixPopupRight}>
+              <h2>Summary</h2>
+            Date Range:
+            {/* <br /> */}
+              {/* {moment() === state.filters.date.gte ? <> Todays Date</> : <>Choose Diiferent Date</>} */}
+              {/* {console.log(moment() == state.filters.date.gte, "date")} */}
+              {/* {console.log(state, "state")} */}
+              {/* {state.filters.date.gte} - {state.filters.date.lte} */}
+
+
+            </div>
+          </div>
+
+
+
+
+          <Row>
+            <Col span={16} style={{ padding: '30px 40px' }}>
+              <h3 className={styles.import}>Export CSV</h3>
+              <div style={{ display: 'flex', marginBottom: '30px' }}>
+                <div style={{ flexDirection: "row" }}>
+                  <p className={styles.header1}>Date Range</p>
+                  <p className={styles.header3}>From</p>
+                  <DatePicker
+                    onChange={popStart}
+                    disabledDate={disabledDateForExp}
+                    allowClear={false}
+                  />
+                  <p className={styles.header3} style={{ margin: '25px 0 13px' }}>To</p>
+                  <DatePicker
+                    onChange={popEnd}
+                    disabledDate={disabledDateForExp}
+                    allowClear={false}
+                  />
+                </div>
+                <div style={{ flexGrow: '1', marginLeft: '70px' }}>
+                  <p className={styles.header1}>Stores information</p>
+                  <p className={styles.header3}>Choose Store  </p>
+                  <Select
+                    mode="multiple"
+                    showSearch
+                    style={{ width: 230 }}
+                    placeholder="Select store"
+                    optionFilterProp="children"
+                    onChange={popStoreChange}
+                    // onChange={handleChange}
+                    value={metrix.popStoreID || 'All Store'}
+                  // defaultValue={['all']}
+                  >
+                    {
+                      stores.length > 1 && (
+                        <Select.Option value="all">
+                          All Stores
+                        </Select.Option>
+                      )
+                    }
+                    {stores.map(str => (<Select.Option name={str.name} value={str.key} key={str.id} >{str.name} </Select.Option>))}
+                  </Select>
+
+                  {/* <Select
                   style={{ marginTop: '57px' }}
                   placeholder={toggle[0]}
                   optionFilterProp="children"
@@ -1059,9 +1152,9 @@ const BillsTable = (props) => {
                 >
                   {toggle.map(str => (<Select.Option defaultValue={toggle[0]} value={str} key={str} >{str}</Select.Option>))}
                 </Select> */}
+                </div>
               </div>
-            </div>
-            {/* {metrix.popMetrics !== 'Bills Metrics' &&
+              {/* {metrix.popMetrics !== 'Bills Metrics' &&
               <div>
                 <h4>DATA COLUMNS</h4>
                 <p className={styles.header3}>Choose the data column to be exported</p>
@@ -1078,31 +1171,36 @@ const BillsTable = (props) => {
                   </Checkbox.Group>
                 </div>
               </div>} */}
-          </Col>
-          <Col
-            span={8}
-            style={{ background: '#1C283A', padding: '20px', borderTopRightRadius: '12px', borderBottomRightRadius: '12px' }}
-          >
-            <h4 className={styles.summary}>Summary</h4>
-            <h4 className={styles.header2}>Date Range </h4>
-            <p>{metrix.popStartDate} -  {metrix.popEndDate}</p>
-            <h4 className={styles.header2}>Stores selected</h4>
-            <p>{!Storeselect || Storeselect.name || 'All Store'}</p>
-            <div>
-              {/* <h4 className={styles.header2}>Export Time</h4>
+            </Col>
+            <Col
+              span={8}
+            // style={{ background: '#1C283A', padding: '20px', borderTopRightRadius: '12px', borderBottomRightRadius: '12px' }}
+            >
+              <h4 className={styles.summary}>Summary</h4>
+              <h4 className={styles.header2}>Date Range </h4>
+              <p>{metrix.popStartDate} -  {metrix.popEndDate}</p>
+              <h4 className={styles.header2}>Stores selected</h4>
+              {/* <p>{!Storeselect || Storeselect.name || 'All Store'}</p> */}
+              <p>{console.log(metrix.popStoreID)}</p>
+
+              <p>{(!popStoreID || popStoreID.join() || "All Store")}</p>
+              <div>
+                {/* <h4 className={styles.header2}>Export Time</h4>
               <p>Columns 6</p> */}
-            </div>
-          </Col>
-        </Row>
-      </Modal>
-      {
-        bills.length > 0 && (
-          <SidebarDrawer
-            data={bill}
-          />
-        )
-      }
-    </div>
+              </div>
+            </Col>
+          </Row>
+        </Modal>
+        {
+          bills.length > 0 && (
+            <SidebarDrawer
+              data={bill}
+            />
+          )
+        }
+      </div>
+    </>
+
   );
 };
 
@@ -1114,4 +1212,5 @@ export default connect(({ global, settings, billsModel, loading, user, storeMode
   storeModel,
   loading: loading.effects['billsModel/getBillsv2'],
   exportLoading: loading.effects['billsModel/exportBillCSV'],
+  sendEmail: loading.effects['billsModel/BillsMetrix']
 }))(BillsTable);
